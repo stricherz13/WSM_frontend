@@ -6,6 +6,11 @@ const MapSearchBar = () => {
     const [search, setSearch] = useState('');
     const [locationName, setLocationName] = useState('');
 
+    const handleSearchSubmit = () => {
+        console.log('Search submitted: ', search);
+        setLocationName(search);
+    }
+
     useEffect(() => {
         if (locationName) {
             console.log('Fetching data for location: ', locationName);
@@ -23,8 +28,8 @@ const MapSearchBar = () => {
                 onChangeText={text => {
                     console.log('Search text: ', text);
                     setSearch(text);
-                    setLocationName(text);
                 }}
+                onSubmitEditing={handleSearchSubmit}
                 value={search}
                 lightTheme
                 round
