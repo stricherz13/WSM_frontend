@@ -14,7 +14,7 @@ const MapSearchBar = () => {
     useEffect(() => {
         if (locationName) {
             console.log('Fetching data for location: ', locationName);
-            fetch(`https://nominatim.openstreetmap.org/search?format=json&polygon=1&limit=1&addressdetails=1&q=${locationName}`)
+            fetch(`https://nominatim.openstreetmap.org/search?format=json&polygon=1&limit=1&addressdetails=1&q=${encodeURIComponent(locationName)}`)
                 .then(response => response.json())
                 .then(data => console.log('Received data: ', data))
                 .catch(error => console.error('Error fetching data ', error));
