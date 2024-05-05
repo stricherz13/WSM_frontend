@@ -43,7 +43,7 @@ const MapSearchBar = () => {
 const styles = StyleSheet.create({
     container: {
         position: 'absolute',
-        top: 35,
+        top: 40,
         width: '100%',
         zIndex: 1,
     },

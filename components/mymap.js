@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 import {StyleSheet, View} from 'react-native';
 import gpsLocation from '../assets/gpsLocation.png';
-import {FAB} from 'react-native-paper';
+import {FAB, Portal} from 'react-native-paper';
 import * as Location from 'expo-location';
 
 
@@ -20,7 +20,7 @@ const MyMap = () => {
 
     useEffect(() => {
         (async () => {
-            let { status } = await Location.requestForegroundPermissionsAsync();
+            let {status} = await Location.requestForegroundPermissionsAsync();
             if (status !== 'granted') {
                 console.error('Permission to access location was denied');
                 return;
@@ -53,19 +53,22 @@ const MyMap = () => {
             >
                 <Marker coordinate={region} image={gpsLocation}/>
             </MapView>
-            <FAB.Group
-                open={open}
-                visible={true}
-                direction="down"
-                icon={open ? 'close' : 'layers'}
-                backdropColor={'rgba(0, 0, 0, 0.25)'}
-                actions={[
-                    {icon: 'satellite', onPress: () => setMapType('satellite')},
-                    {icon: 'terrain', onPress: () => setMapType('terrain')},
-                    {icon: 'map', onPress: () => setMapType('standard')},
-                ]}
-                onStateChange={({open}) => setOpen(open)}
-            />
+            <Portal>
+                <FAB.Group
+                    style={{paddingBottom: 100}}
+                    open={open}
+                    visible={true}
+                    direction="up"
+                    icon={open ? 'close' : 'layers'}
+                    backdropColor={'rgba(0, 0, 0, 0.25)'}
+                    actions={[
+                        {icon: 'satellite', onPress: () => setMapType('satellite')},
+                        {icon: 'terrain', onPress: () => setMapType('terrain')},
+                        {icon: 'map', onPress: () => setMapType('standard')},
+                    ]}
+                    onStateChange={({open}) => setOpen(open)}
+                />
+            </Portal>
         </View>
     );
 }
