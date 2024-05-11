@@ -1,22 +1,31 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 import {StyleSheet, View} from 'react-native';
 import gpsLocation from '../assets/gpsLocation.png';
 import {FAB, Portal} from 'react-native-paper';
 import * as Location from 'expo-location';
+import MapSearchBar from "./MapSearchBar";
 
 
 const MyMap = () => {
     const [region, setRegion] = useState(null)
+    const [mapType, setMapType] = useState('standard');
+    const [open, setOpen] = useState(false);
+    const mapRef = useRef(null);
 
     const handleMapPress = (event) => {
         const {latitude, longitude} = event.nativeEvent.coordinate;
         console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
     };
 
-    const [mapType, setMapType] = useState('standard');
-
-    const [open, setOpen] = useState(false);
+    const animateToRegion = (lat, long) => {
+        mapRef.current.animateToRegion({
+            latitude: lat,
+            longitude: long,
+            latitudeDelta: 0.01,
+            longitudeDelta: 0.01,
+        }, 1000);
+    }
 
     useEffect(() => {
         (async () => {
@@ -44,7 +53,9 @@ const MyMap = () => {
 
     return (
         <View style={styles.container}>
+            <MapSearchBar onSearchSubmit={animateToRegion}/>
             <MapView
+                ref={mapRef}
                 provider={PROVIDER_GOOGLE}
                 style={styles.map}
                 region={region}
