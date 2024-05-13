@@ -5,12 +5,14 @@ const GpsButton = ({ animateToRegion, latitude, longitude }) => {
     return (
         <IconButton
             icon="crosshairs-gps"
-            color="#841584"
-            size={60}
+            color="#22005d"
+            size={40}
             style={{
                 position: 'absolute',
-                bottom: 20,
-                right: 20,
+                bottom: 45,
+                right: 10,
+                backgroundColor: '#e9dcfd',
+                borderRadius:  20,
             }}
             onPress={() => animateToRegion(latitude, longitude)}
         />
