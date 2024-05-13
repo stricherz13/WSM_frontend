@@ -5,6 +5,7 @@ import gpsLocation from '../assets/gpsLocation.png';
 import {FAB, Portal} from 'react-native-paper';
 import * as Location from 'expo-location';
 import MapSearchBar from "./MapSearchBar";
+import GpsButton from "./GpsButton";
 
 
 const MyMap = () => {
@@ -64,6 +65,11 @@ const MyMap = () => {
             >
                 <Marker coordinate={region} image={gpsLocation}/>
             </MapView>
+            <GpsButton
+                animateToRegion={animateToRegion}
+                latitude={region.latitude}
+                longitude={region.longitude}
+            />
             <Portal>
                 <FAB.Group
                     style={{paddingBottom: 100}}
