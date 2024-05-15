@@ -12,7 +12,7 @@ const GpsButton = ({ animateToRegion, latitude, longitude }) => {
                 bottom: 45,
                 right: 10,
                 backgroundColor: '#e9dcfd',
-                borderRadius:  20,
+                borderRadius:  15,
             }}
             onPress={() => animateToRegion(latitude, longitude)}
         />
